@@ -110,8 +110,22 @@ const SpotifyTimer = () => {
 
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
+    const accessTokenFromUrl = urlParams.get('access_token');
+    const refreshTokenFromUrl = urlParams.get('refresh_token');
     
-    if (code) {
+    if (accessTokenFromUrl && refreshTokenFromUrl) {
+      // Handle direct token callback from backend redirect
+      setAccessToken(accessTokenFromUrl);
+      setRefreshToken(refreshTokenFromUrl);
+      setIsLoggedIn(true);
+      
+      localStorage.setItem('spotify_access_token', accessTokenFromUrl);
+      localStorage.setItem('spotify_refresh_token', refreshTokenFromUrl);
+      
+      // Clean up URL
+      window.history.replaceState({}, document.title, '/');
+      setActiveTab('timer');
+    } else if (code) {
       handleAuthCallback(code);
     } else {
       // Try to load stored tokens
