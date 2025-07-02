@@ -23,10 +23,6 @@
       "dest": "/frontend/$1"
     }
   ],
-  "env": {
-    "SPOTIFY_CLIENT_ID": "b8df048a15f4402a866d7253a435139e",
-    "SPOTIFY_CLIENT_SECRET": "a88333b28daf49ea927f159c6454dd60"
-  },
   "functions": {
     "backend/server.py": {
       "maxDuration": 30
