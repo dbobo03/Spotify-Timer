@@ -1,0 +1,12 @@
+node_modules/
+.cache
+__pycache__/
+*.log
+backend_test.py
+spotify_auth_test.py
+comprehensive_auth_test.py
+callback_test.py
+test_result.md
+spotify-timer-pro.tar.gz
+tests/
+.emergent/
