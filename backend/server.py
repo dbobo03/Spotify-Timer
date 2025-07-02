@@ -114,11 +114,21 @@ async def spotify_callback(code: str):
         token_info = sp_oauth.get_access_token(code)
         
         if token_info:
-            return {
-                "access_token": token_info["access_token"],
-                "refresh_token": token_info["refresh_token"],
-                "expires_in": token_info["expires_in"]
-            }
+            # Redirect to frontend with tokens as URL parameters
+            from fastapi.responses import RedirectResponse
+            import urllib.parse
+            
+            access_token = token_info["access_token"]
+            refresh_token = token_info["refresh_token"]
+            expires_in = token_info["expires_in"]
+            
+            # Get frontend URL from environment or construct it
+            frontend_url = os.environ.get('FRONTEND_URL', 'https://d01819a1-dc26-483e-981d-fb955f8feaf3.preview.emergentagent.com')
+            
+            # Create callback URL with tokens
+            callback_url = f"{frontend_url}?access_token={urllib.parse.quote(access_token)}&refresh_token={urllib.parse.quote(refresh_token)}&expires_in={expires_in}"
+            
+            return RedirectResponse(url=callback_url)
         else:
             raise HTTPException(status_code=400, detail="Failed to get access token")
     except Exception as e:
