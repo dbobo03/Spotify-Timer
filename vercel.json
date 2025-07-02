@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/server.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/backend/server.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/$1"
+    }
+  ],
+  "env": {
+    "SPOTIFY_CLIENT_ID": "b8df048a15f4402a866d7253a435139e",
+    "SPOTIFY_CLIENT_SECRET": "a88333b28daf49ea927f159c6454dd60"
+  },
+  "functions": {
+    "backend/server.py": {
+      "maxDuration": 30
+    }
+  }
+}

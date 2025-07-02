@@ -1,0 +1,25 @@
+{
+  "short_name": "Spotify Timer",
+  "name": "Spotify Timer Pro - Advanced Music Scheduling",
+  "description": "Schedule your Spotify music with precision using calendar and timer features",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iOTYiIGN5PSI5NiIgcj0iOTYiIGZpbGw9IiMxREI5NTQiLz48cGF0aCBkPSJNNzIgNzJIOTZWMTIwSDcyVjcyWk0xMjAgNzJIMTQ0VjEyMEgxMjBWNzJaIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjU2IiBjeT0iMjU2IiByPSIyNTYiIGZpbGw9IiMxREI5NTQiLz48cGF0aCBkPSJNMTkyIDE5Mkg2NEwyNTZWMzIwSDE5MlYxOTJaTTMyMCAxOTJIMzg0VjMyMEgzMjBWMTkyWiIgZmlsbD0id2hpdGUiLz48L3N2Zz4=",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#1DB954",
+  "background_color": "#191414",
+  "orientation": "portrait-primary",
+  "categories": ["music", "productivity", "utilities"],
+  "lang": "en",
+  "dir": "ltr"
+}

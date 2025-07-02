@@ -1,0 +1,11 @@
+{
+  "name": "spotify-timer-pro",
+  "version": "1.0.0",
+  "description": "Advanced Spotify Timer with Calendar Scheduling",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build"
+  },
+  "keywords": ["spotify", "timer", "scheduling", "music"],
+  "author": "Spotify Timer Pro",
+  "license": "MIT"
+}

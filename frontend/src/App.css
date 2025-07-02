@@ -1,0 +1,1219 @@
+/* Spotify Timer Pro Styles */
+.spotify-timer {
+  min-height: 100vh;
+  background: #191414;
+  color: #FFFFFF;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Welcome Page Styles */
+.welcome-page {
+  padding: 20px;
+}
+
+.hero-section {
+  text-align: center;
+  padding: 40px 0;
+  background: linear-gradient(135deg, #1DB954 0%, #191414 100%);
+  border-radius: 20px;
+  margin-bottom: 40px;
+}
+
+.hero-section h1 {
+  font-size: 3.5em;
+  margin-bottom: 15px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-subtitle {
+  font-size: 1.4em;
+  color: #B3B3B3;
+  margin-bottom: 30px;
+}
+
+.hero-features {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.feature-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  backdrop-filter: blur(10px);
+}
+
+.welcome-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.feature-section {
+  margin-bottom: 50px;
+}
+
+.feature-section h2 {
+  color: #1DB954;
+  font-size: 2.2em;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.step-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.step-card {
+  background: #0f0f0f;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  border: 2px solid #333;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-5px);
+  border-color: #1DB954;
+}
+
+.step-number {
+  width: 50px;
+  height: 50px;
+  background: #1DB954;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0 auto 20px;
+}
+
+.step-card h3 {
+  color: #1DB954;
+  margin-bottom: 15px;
+  font-size: 1.3em;
+}
+
+.step-card p {
+  color: #B3B3B3;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.action-btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1em;
+}
+
+.action-btn.primary {
+  background: #1DB954;
+  color: white;
+}
+
+.action-btn.primary:hover {
+  background: #1ed760;
+  transform: scale(1.05);
+}
+
+.action-btn.secondary {
+  background: transparent;
+  color: #1DB954;
+  border: 2px solid #1DB954;
+}
+
+.action-btn.secondary:hover {
+  background: #1DB954;
+  color: white;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.feature-card {
+  background: #0f0f0f;
+  padding: 25px;
+  border-radius: 15px;
+  border: 1px solid #333;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-3px);
+  border-color: #1DB954;
+}
+
+.feature-card h3 {
+  color: #1DB954;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+}
+
+.feature-card p {
+  color: #B3B3B3;
+  line-height: 1.5;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #333;
+}
+
+.header h1 {
+  color: #1DB954;
+  margin: 0;
+  font-size: 1.8em;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 0.9em;
+}
+
+.settings-btn {
+  background: none;
+  border: none;
+  font-size: 1.3em;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.settings-btn:hover {
+  background: #333;
+}
+
+.logout-btn-small {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 0.8em;
+}
+
+.logout-btn-small:hover {
+  background: #555;
+}
+
+/* Premium Required */
+.premium-required {
+  text-align: center;
+  padding: 40px;
+}
+
+.premium-required h2 {
+  color: #1DB954;
+  margin-bottom: 20px;
+}
+
+.upgrade-btn {
+  display: inline-block;
+  background: #1DB954;
+  color: white;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 20px;
+  margin: 10px;
+  transition: background 0.3s ease;
+}
+
+.upgrade-btn:hover {
+  background: #1ed760;
+}
+
+.logout-btn {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 15px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+/* Tab Navigation */
+.tab-navigation {
+  display: flex;
+  margin-bottom: 20px;
+  background: #0f0f0f;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.tab-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  color: #B3B3B3;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+  background: #1DB954;
+  color: white;
+}
+
+.tab-btn:hover:not(.active):not(.disabled) {
+  background: #333;
+  color: white;
+}
+
+.tab-btn.disabled {
+  color: #555;
+  cursor: not-allowed;
+}
+
+/* Timer Display */
+.timer-display {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: #0f0f0f;
+  border-radius: 15px;
+  border: 2px solid #1DB954;
+}
+
+.time-remaining {
+  font-size: 3em;
+  font-weight: bold;
+  color: #1DB954;
+  margin-bottom: 10px;
+  font-family: 'Courier New', monospace;
+}
+
+.timer-info {
+  color: #B3B3B3;
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+
+.timer-mode {
+  color: #1DB954;
+  font-size: 0.9em;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.control-btn {
+  padding: 12px 25px;
+  font-size: 1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.start-btn {
+  background: #1DB954;
+  color: white;
+}
+
+.start-btn:hover:not(:disabled) {
+  background: #1ed760;
+  transform: scale(1.05);
+}
+
+.stop-btn {
+  background: #FF6B35;
+  color: white;
+}
+
+.stop-btn:hover:not(:disabled) {
+  background: #ff7f50;
+  transform: scale(1.05);
+}
+
+.full-stop-btn {
+  background: #E22134;
+  color: white;
+}
+
+.full-stop-btn:hover {
+  background: #ff3040;
+  transform: scale(1.05);
+}
+
+.control-btn:disabled {
+  background: #333;
+  color: #666;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Settings Panel */
+.settings-panel {
+  background: #0f0f0f;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #333;
+}
+
+.settings-panel h3 {
+  color: #1DB954;
+  margin-bottom: 15px;
+  font-size: 1.1em;
+}
+
+.setting-group {
+  margin-bottom: 15px;
+}
+
+.setting-group label {
+  display: block;
+  color: #B3B3B3;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.setting-group small {
+  color: #888;
+  font-size: 0.8em;
+  display: block;
+  margin-top: 5px;
+}
+
+.settings-footer {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #333;
+  margin-top: 20px;
+}
+
+.settings-footer p {
+  color: #B3B3B3;
+  margin-bottom: 15px;
+}
+
+/* Toggle Groups */
+.toggle-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.toggle-btn {
+  background: #333;
+  color: white;
+  border: 1px solid #555;
+  padding: 8px 16px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9em;
+}
+
+.toggle-btn.active,
+.toggle-btn:hover {
+  background: #1DB954;
+  border-color: #1DB954;
+}
+
+/* Schedule Section */
+.schedule-section {
+  background: #0f0f0f;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.schedule-header {
+  margin-bottom: 20px;
+}
+
+.schedule-section h3 {
+  color: #1DB954;
+  margin-bottom: 10px;
+}
+
+.schedule-section h4 {
+  color: #1DB954;
+  margin-bottom: 15px;
+  font-size: 1.1em;
+}
+
+.schedule-section p {
+  color: #B3B3B3;
+  margin-bottom: 15px;
+  font-size: 0.9em;
+}
+
+.schedule-type-toggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Weekly Schedule */
+.weekly-schedule-section {
+  margin-bottom: 30px;
+}
+
+.weekly-schedule {
+  overflow-x: auto;
+}
+
+.schedule-header-weekly {
+  display: grid;
+  grid-template-columns: 80px repeat(7, 1fr);
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.time-label {
+  font-weight: bold;
+  color: #1DB954;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+}
+
+.day-header {
+  text-align: center;
+  padding: 8px;
+  background: #1a1a1a;
+  border-radius: 8px;
+}
+
+.day-name {
+  font-weight: bold;
+  color: #1DB954;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+
+.whole-day-checkbox {
+  font-size: 0.75em;
+  color: #B3B3B3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  cursor: pointer;
+}
+
+.whole-day-checkbox input {
+  width: 12px;
+  height: 12px;
+  accent-color: #1DB954;
+}
+
+.schedule-grid {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.schedule-row {
+  display: grid;
+  grid-template-columns: 80px repeat(7, 1fr);
+  gap: 5px;
+  margin-bottom: 3px;
+}
+
+.time-slot-label {
+  font-size: 0.8em;
+  color: #B3B3B3;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.schedule-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: #1a1a1a;
+  border-radius: 5px;
+  min-height: 30px;
+}
+
+.schedule-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #1DB954;
+  cursor: pointer;
+}
+
+/* Calendar Styles */
+.calendar-schedule-section {
+  margin-top: 30px;
+}
+
+.calendar-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.calendar {
+  background: #1a1a1a;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.calendar-header button {
+  background: #1DB954;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.calendar-header h3 {
+  color: #1DB954;
+  margin: 0;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 5px;
+}
+
+.weekday {
+  text-align: center;
+  padding: 8px 4px;
+  font-size: 0.8em;
+  color: #B3B3B3;
+  font-weight: bold;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #333;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.calendar-day.empty {
+  cursor: default;
+  background: transparent;
+}
+
+.calendar-day:hover:not(.empty) {
+  background: #555;
+}
+
+.calendar-day.selected {
+  background: #1DB954;
+  color: white;
+}
+
+.calendar-day.today {
+  border: 2px solid #1DB954;
+}
+
+.calendar-day.has-schedule {
+  background: rgba(29, 185, 84, 0.3);
+}
+
+.day-number {
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.schedule-indicator {
+  width: 6px;
+  height: 6px;
+  background: #1DB954;
+  border-radius: 50%;
+  margin-top: 2px;
+}
+
+.date-schedule-config {
+  background: #1a1a1a;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.date-schedule-config h4 {
+  color: #1DB954;
+  margin-bottom: 15px;
+}
+
+.time-slots-config {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.time-slot-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85em;
+  color: #B3B3B3;
+  cursor: pointer;
+}
+
+.time-slot-checkbox input {
+  width: 14px;
+  height: 14px;
+  accent-color: #1DB954;
+}
+
+/* Timer Presets */
+.timer-presets {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.preset-btn {
+  background: #333;
+  color: white;
+  border: 1px solid #555;
+  padding: 6px 12px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85em;
+}
+
+.preset-btn.active,
+.preset-btn:hover {
+  background: #1DB954;
+  border-color: #1DB954;
+}
+
+/* Track and Playlist Selection */
+.track-selection, .playlist-selection {
+  background: #0f0f0f;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.track-selection h3, .track-selection h4,
+.playlist-selection h3, .playlist-selection h4 {
+  color: #1DB954;
+  margin-bottom: 12px;
+  font-size: 1.1em;
+}
+
+.search-section {
+  margin-bottom: 20px;
+}
+
+.search-type-toggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.search-input {
+  display: flex;
+  gap: 8px;
+}
+
+.search-input input {
+  flex-grow: 1;
+  background: #333;
+  border: 1px solid #555;
+  color: white;
+  padding: 10px 12px;
+  border-radius: 25px;
+  font-size: 0.9em;
+}
+
+.search-input input:focus {
+  outline: none;
+  border-color: #1DB954;
+}
+
+.search-input button {
+  background: #1DB954;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.search-input button:hover:not(:disabled) {
+  background: #1ed760;
+}
+
+.search-input button:disabled {
+  background: #333;
+  color: #666;
+}
+
+/* Track and Playlist Items */
+.track-item, .playlist-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  background: #1a1a1a;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.track-item.selected, .playlist-item.selected {
+  border-left: 4px solid #1DB954;
+}
+
+.track-number, .playlist-number {
+  color: #1DB954;
+  font-weight: bold;
+  min-width: 20px;
+  font-size: 0.9em;
+}
+
+.track-image-small, .playlist-image-small {
+  width: 35px;
+  height: 35px;
+  border-radius: 3px;
+}
+
+.track-info, .playlist-info {
+  flex-grow: 1;
+}
+
+.track-name, .playlist-name {
+  font-weight: bold;
+  font-size: 0.95em;
+  margin-bottom: 3px;
+}
+
+.track-artist, .playlist-description {
+  color: #B3B3B3;
+  font-size: 0.8em;
+  margin-bottom: 2px;
+}
+
+.track-duration, .playlist-tracks {
+  color: #888;
+  font-size: 0.75em;
+}
+
+.select-btn, .remove-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 0.85em;
+}
+
+.select-btn {
+  background: #1DB954;
+  color: white;
+}
+
+.select-btn:hover:not(:disabled) {
+  background: #1ed760;
+}
+
+.select-btn:disabled {
+  background: #333;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.remove-btn {
+  background: #E22134;
+  color: white;
+  font-size: 1.1em;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-btn:hover {
+  background: #ff3040;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .spotify-timer {
+    padding: 5px;
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .header h1 {
+    font-size: 1.5em;
+  }
+  
+  .user-info {
+    font-size: 0.8em;
+    justify-content: center;
+  }
+  
+  .hero-section h1 {
+    font-size: 2.5em;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1em;
+  }
+  
+  .hero-features {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .step-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .time-remaining {
+    font-size: 2.2em;
+  }
+  
+  .timer-info, .timer-mode {
+    font-size: 0.8em;
+  }
+  
+  .controls {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .control-btn {
+    width: 100%;
+    max-width: 200px;
+    margin-bottom: 8px;
+  }
+  
+  .timer-presets {
+    justify-content: center;
+  }
+  
+  .preset-btn {
+    font-size: 0.8em;
+    padding: 5px 10px;
+  }
+  
+  .track-item, .playlist-item {
+    flex-direction: row;
+    text-align: left;
+    gap: 8px;
+    padding: 6px;
+  }
+  
+  .track-image-small, .playlist-image-small {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .track-name, .playlist-name {
+    font-size: 0.9em;
+  }
+  
+  .track-artist, .track-position, .playlist-description {
+    font-size: 0.75em;
+  }
+  
+  .search-input {
+    flex-direction: column;
+  }
+  
+  .toggle-group {
+    flex-direction: column;
+  }
+  
+  .toggle-btn {
+    text-align: center;
+  }
+  
+  .calendar-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .calendar-weekdays {
+    font-size: 0.7em;
+  }
+  
+  .calendar-day {
+    font-size: 0.8em;
+  }
+  
+  .time-slots-config {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Mobile Schedule Grid */
+  .schedule-header-weekly {
+    grid-template-columns: 60px repeat(7, 1fr);
+    gap: 3px;
+  }
+  
+  .schedule-row {
+    grid-template-columns: 60px repeat(7, 1fr);
+    gap: 3px;
+  }
+  
+  .time-slot-label {
+    font-size: 0.7em;
+    padding: 3px;
+  }
+  
+  .day-header {
+    padding: 5px;
+  }
+  
+  .day-name {
+    font-size: 0.8em;
+  }
+  
+  .whole-day-checkbox {
+    font-size: 0.65em;
+  }
+  
+  .schedule-cell {
+    padding: 5px;
+    min-height: 25px;
+  }
+  
+  .schedule-checkbox {
+    width: 15px;
+    height: 15px;
+  }
+  
+  .tab-btn {
+    padding: 10px 15px;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.3em;
+  }
+  
+  .hero-section h1 {
+    font-size: 2em;
+  }
+  
+  .hero-subtitle {
+    font-size: 1em;
+  }
+  
+  .time-remaining {
+    font-size: 1.8em;
+  }
+  
+  .timer-info, .timer-mode {
+    font-size: 0.75em;
+  }
+  
+  .control-btn {
+    padding: 10px 20px;
+    font-size: 0.9em;
+  }
+  
+  .track-name, .playlist-name {
+    font-size: 0.85em;
+  }
+  
+  .track-artist, .track-position, .playlist-description {
+    font-size: 0.7em;
+  }
+  
+  .preset-btn {
+    font-size: 0.75em;
+    padding: 4px 8px;
+  }
+  
+  .tab-btn {
+    padding: 8px 12px;
+    font-size: 0.85em;
+  }
+  
+  .step-card {
+    padding: 20px;
+  }
+  
+  .step-number {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #191414;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1DB954;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1ed760;
+}
+
+/* Animation for timer */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.time-remaining:not(:contains("PLAYING")) {
+  animation: pulse 2s infinite;
+}
+
+/* Focus states for accessibility */
+button:focus,
+input:focus {
+  outline: 2px solid #1DB954;
+  outline-offset: 2px;
+}
+
+/* PWA Support */
+@media (display-mode: standalone) {
+  .spotify-timer {
+    padding-top: 20px;
+  }
+}
+
+/* Dark theme adjustments for better mobile visibility */
+@media (prefers-color-scheme: dark) {
+  .track-item, .playlist-item {
+    background: #2a2a2a;
+  }
+  
+  .schedule-cell, .day-header {
+    background: #2a2a2a;
+  }
+  
+  .calendar-day {
+    background: #2a2a2a;
+  }
+}
+
+/* Loading and transition effects */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Success and error states */
+.success {
+  color: #1DB954;
+  background: rgba(29, 185, 84, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.error {
+  color: #E22134;
+  background: rgba(226, 33, 52, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .time-remaining {
+    animation: none;
+  }
+  
+  .control-btn:hover {
+    transform: none;
+  }
+  
+  .fade-in {
+    animation: none;
+  }
+}
