@@ -116,9 +116,6 @@ async def spotify_callback(code: str):
         
         if token_info:
             # Redirect to frontend with tokens as URL parameters
-            from fastapi.responses import RedirectResponse
-            import urllib.parse
-            
             access_token = token_info["access_token"]
             refresh_token = token_info["refresh_token"]
             expires_in = token_info["expires_in"]
