@@ -108,12 +108,29 @@ const SpotifyTimer = () => {
     // Load saved settings from localStorage (available without login)
     loadLocalSettings();
 
+    // Check for tokens in URL hash (Spotify implicit flow)
+    const hash = window.location.hash.substring(1);
+    const hashParams = new URLSearchParams(hash);
+    const accessTokenFromHash = hashParams.get('access_token');
+    const expiresIn = hashParams.get('expires_in');
+    
+    // Also check query parameters (for backward compatibility)
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
     const accessTokenFromUrl = urlParams.get('access_token');
     const refreshTokenFromUrl = urlParams.get('refresh_token');
     
-    if (accessTokenFromUrl && refreshTokenFromUrl) {
+    if (accessTokenFromHash) {
+      // Handle Spotify implicit flow token
+      setAccessToken(accessTokenFromHash);
+      setIsLoggedIn(true);
+      
+      localStorage.setItem('spotify_access_token', accessTokenFromHash);
+      
+      // Clean up URL
+      window.history.replaceState({}, document.title, '/');
+      setActiveTab('timer');
+    } else if (accessTokenFromUrl && refreshTokenFromUrl) {
       // Handle direct token callback from backend redirect
       setAccessToken(accessTokenFromUrl);
       setRefreshToken(refreshTokenFromUrl);
