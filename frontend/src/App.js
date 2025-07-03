@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
-import axios from 'axios';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+// Spotify configuration
+const SPOTIFY_CLIENT_ID = 'b8df048a15f4402a866d7253a435139e';
+const SPOTIFY_REDIRECT_URI = 'https://spotify-timer.vercel.app';
 
 // Timer presets in minutes and seconds for easy testing
 const TIMER_PRESETS = [
