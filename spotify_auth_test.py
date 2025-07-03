@@ -5,7 +5,7 @@ import urllib.parse
 import time
 
 # Get the backend URL from the frontend .env file
-BACKEND_URL = "https://1f498d48-c8a4-4468-a0dd-6847de5c58d1.preview.emergentagent.com/api"
+BACKEND_URL = "https://be99c99a-b61c-4290-81c3-40fbf57bcd47.preview.emergentagent.com/api"
 
 def test_spotify_auth():
     """Test the Spotify authentication system in detail"""
@@ -34,7 +34,7 @@ def test_spotify_auth():
             
             # 2. Verify the redirect URI
             print("\n2. Verifying redirect URI...")
-            expected_redirect_uri = "https://1f498d48-c8a4-4468-a0dd-6847de5c58d1.preview.emergentagent.com/auth/callback"
+            expected_redirect_uri = "https://be99c99a-b61c-4290-81c3-40fbf57bcd47.preview.emergentagent.com/auth/callback"
             
             # Parse the URL to check all parameters
             parsed_url = urllib.parse.urlparse(auth_url)

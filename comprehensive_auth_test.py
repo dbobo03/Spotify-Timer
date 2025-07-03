@@ -6,7 +6,7 @@ import time
 import os
 
 # Get the backend URL from the frontend .env file
-BACKEND_URL = "https://1f498d48-c8a4-4468-a0dd-6847de5c58d1.preview.emergentagent.com/api"
+BACKEND_URL = "https://be99c99a-b61c-4290-81c3-40fbf57bcd47.preview.emergentagent.com/api"
 
 def run_comprehensive_auth_test():
     """Run a comprehensive test of the Spotify authentication system"""
@@ -59,7 +59,7 @@ def run_comprehensive_auth_test():
                 all_tests_passed = False
             
             # Check redirect URI
-            expected_redirect_uri = "https://1f498d48-c8a4-4468-a0dd-6847de5c58d1.preview.emergentagent.com/auth/callback"
+            expected_redirect_uri = "https://be99c99a-b61c-4290-81c3-40fbf57bcd47.preview.emergentagent.com/auth/callback"
             if "redirect_uri" in query_params:
                 actual_redirect_uri = query_params["redirect_uri"][0]
                 if actual_redirect_uri == expected_redirect_uri:

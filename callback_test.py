@@ -3,7 +3,7 @@ import requests
 import json
 
 # Get the backend URL from the frontend .env file
-BACKEND_URL = "https://1f498d48-c8a4-4468-a0dd-6847de5c58d1.preview.emergentagent.com/api"
+BACKEND_URL = "https://be99c99a-b61c-4290-81c3-40fbf57bcd47.preview.emergentagent.com/api"
 
 def test_callback_endpoint():
     """Test the Spotify callback endpoint structure"""

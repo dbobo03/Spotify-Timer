@@ -188,7 +188,7 @@ backend:
         comment: "Tested /api/auth/login endpoint - successfully returns a valid Spotify authorization URL with the correct client ID and redirect URI. The URL format is correct and includes all required parameters."
       - working: true
         agent: "testing"
-        comment: "Verified the updated redirect URI is correctly set to https://1f498d48-c8a4-4468-a0dd-6847de5c58d1.preview.emergentagent.com/auth/callback in the auth_url. All required OAuth parameters are present and properly formatted."
+        comment: "Verified the updated redirect URI is correctly set to https://be99c99a-b61c-4290-81c3-40fbf57bcd47.preview.emergentagent.com/auth/callback in the auth_url. All required OAuth parameters are present and properly formatted."
 
   - task: "Spotify Web API Integration"
     implemented: true
