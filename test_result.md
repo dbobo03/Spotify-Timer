@@ -292,28 +292,20 @@ frontend:
 
 metadata:
   created_by: "main_agent"
-  version: "1.0"
-  test_sequence: 1
-  run_ui: false
+  version: "2.0"
+  test_sequence: 2
+  run_ui: true
 
 test_plan:
   current_focus:
-    - "Spotify OAuth2.0 Authentication"
-    - "Spotify Web API Integration"
-    - "Timer Settings Storage"
-    - "Track Position Management"
-  stuck_tasks: []
+    - "Frontend-Only Spotify Authentication"
+    - "Calendar and Schedule Features with Storage"
+    - "Timer Functionality"
+  stuck_tasks:
+    - "Frontend-Only Spotify Authentication"
   test_all: false
-  test_priority: "high_first"
+  test_priority: "stuck_first"
 
 agent_communication:
   - agent: "main"
-    message: "Implemented complete Spotify Timer web app with OAuth2.0 authentication, track selection, timer functionality, and playback control. Ready for backend testing to verify API endpoints work correctly."
-  - agent: "testing"
-    message: "Completed comprehensive testing of all backend API endpoints. Created backend_test.py to test all required endpoints. All tests passed successfully. The Spotify Timer API is working correctly with proper authentication, search functionality, timer settings storage, and track position management. MongoDB integration is working as expected for data persistence."
-  - agent: "testing"
-    message: "Verified the updated Spotify authentication redirect URI. The /api/auth/login endpoint correctly returns an auth_url with the updated redirect URI (https://1f498d48-c8a4-4468-a0dd-6847de5c58d1.preview.emergentagent.com/auth/callback). All required OAuth parameters are present and properly formatted. The authentication flow is working as expected."
-  - agent: "testing"
-    message: "Conducted comprehensive testing of the Spotify authentication system. The /api/auth/login endpoint correctly generates a valid Spotify authorization URL with the proper redirect URI (https://1f498d48-c8a4-4468-a0dd-6847de5c58d1.preview.emergentagent.com/auth/callback). All required OAuth parameters (client_id, response_type, redirect_uri, scope) are present and correctly formatted. The API connectivity is good. Note: The callback endpoint is accepting invalid codes and returning tokens, which is unusual and might be due to a test/mock configuration in the backend. In a production environment, this should be investigated further."
-  - agent: "testing"
-    message: "Performed detailed testing of the Spotify login endpoint as requested. The /api/auth/login endpoint is working correctly and returns a properly formatted auth_url. The auth_url contains all required OAuth parameters including client_id (b8df048a15f4402a866d7253a435139e), response_type (code), and the correct redirect URI (https://1f498d48-c8a4-4468-a0dd-6847de5c58d1.preview.emergentagent.com/auth/callback). All necessary scopes are included (user-read-playback-state, user-modify-playback-state, user-read-private, streaming, user-read-email). The callback endpoint is accepting authentication codes and returning tokens as expected. No issues were found with the authentication URL generation."
+    message: "Switched to frontend-only architecture. Removed all backend Python dependencies to resolve 250MB limit on Vercel. Spotify authentication now uses implicit flow with hash tokens. Login flow works until token callback, then shows white page. Need to diagnose JavaScript errors and test storage integration for calendar/schedule features."
