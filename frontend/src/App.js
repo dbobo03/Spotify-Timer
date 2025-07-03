@@ -291,19 +291,8 @@ const SpotifyTimer = () => {
   };
 
   const refreshAccessToken = async () => {
-    try {
-      const response = await axios.post(`${API}/auth/refresh`, { refresh_token: refreshToken });
-      const { access_token } = response.data;
-      setAccessToken(access_token);
-      localStorage.setItem('spotify_access_token', access_token);
-    } catch (error) {
-      console.error('Token refresh failed:', error);
-      localStorage.removeItem('spotify_access_token');
-      localStorage.removeItem('spotify_refresh_token');
-      setAccessToken(null);
-      setRefreshToken(null);
-      setIsLoggedIn(false);
-    }
+    console.log('Token refresh not needed in implicit flow');
+    // Implicit flow tokens can't be refreshed - need re-authentication
   };
 
   const loadDevices = async () => {
