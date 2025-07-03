@@ -330,15 +330,14 @@ const SpotifyTimer = () => {
   };
 
   const saveTimerSettings = async () => {
-    if (!user?.id) return;
-    
     try {
-      await axios.post(`${API}/timer/settings`, {
-        user_id: user.id,
+      // Save to localStorage instead of backend
+      const settings = {
         timer_duration_minutes: timerDuration,
         play_duration_seconds: playDuration,
         selected_tracks: selectedTracks
-      });
+      };
+      localStorage.setItem('timer_settings', JSON.stringify(settings));
     } catch (error) {
       console.error('Failed to save timer settings:', error);
     }
