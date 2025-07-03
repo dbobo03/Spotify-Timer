@@ -155,11 +155,11 @@ frontend:
 
   - task: "Spotify Web Playback Integration"
     implemented: true
-    working: "NA"
+    working: false
     file: "App.js"
-    stuck_count: 0
+    stuck_count: 1
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
@@ -167,6 +167,9 @@ frontend:
       - working: "NA"
         agent: "testing"
         comment: "Cannot test Spotify playback integration until the authentication issue is fixed. The app crashes with 'ReferenceError: axios is not defined' when trying to make API calls to Spotify."
+      - working: false
+        agent: "testing"
+        comment: "The app now crashes with 'setupAbsoluteTimeMonitoring is not defined' after login. This function is referenced in the useEffect hook on line 177 but is not defined in the code. This prevents testing the Spotify Web Playback Integration."
 
 backend:
   - task: "Spotify OAuth2.0 Authentication"
