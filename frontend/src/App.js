@@ -287,13 +287,22 @@ const SpotifyTimer = () => {
 
   const loadUserProfile = async () => {
     try {
-      const response = await axios.get(`${API}/spotify/user?access_token=${accessToken}`);
-      setUser(response.data);
+      if (!accessToken) return;
+      
+      const response = await fetch('https://api.spotify.com/v1/me', {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+      
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData);
+      } else {
+        console.error('Failed to load user profile');
+      }
     } catch (error) {
       console.error('Failed to load user profile:', error);
-      if (refreshToken) {
-        await refreshAccessToken();
-      }
     }
   };
 
