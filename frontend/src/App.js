@@ -297,8 +297,18 @@ const SpotifyTimer = () => {
 
   const loadDevices = async () => {
     try {
-      const response = await axios.get(`${API}/spotify/devices?access_token=${accessToken}`);
-      setDevices(response.data.devices || []);
+      if (!accessToken) return;
+      
+      const response = await fetch('https://api.spotify.com/v1/me/player/devices', {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setDevices(data.devices || []);
+      }
     } catch (error) {
       console.error('Failed to load devices:', error);
     }
