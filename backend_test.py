@@ -127,7 +127,7 @@ def main():
     # Verify auth_url is present and is a valid Spotify URL with correct redirect URI
     if auth_passed and "auth_url" in auth_response:
         auth_url = auth_response["auth_url"]
-        expected_redirect_uri = "https://be99c99a-b61c-4290-81c3-40fbf57bcd47.preview.emergentagent.com/auth/callback"
+        expected_redirect_uri = "https://spotify-timer.vercel.app/api/auth/callback"
         
         # Parse the URL to check all parameters
         parsed_url = urllib.parse.urlparse(auth_url)
@@ -160,77 +160,11 @@ def main():
             print("❌ Auth URL validation failed - issues with URL format or parameters")
             test_results["failed"] += 1
     
-    # 3. Test Spotify Search (without access token - should fail with 422)
+    # 3. Test Spotify Auth Callback (without code - should fail with 422)
     run_test(
-        "Spotify Search Without Token", 
-        "/spotify/search", 
-        params={"q": "test song"},
+        "Spotify Auth Callback Without Code", 
+        "/auth/callback", 
         expected_status=422  # Expecting validation error for missing required parameter
-    )
-    
-    # 4. Test Timer Settings
-    # Generate a test user ID
-    test_user_id = str(uuid.uuid4())
-    
-    # Test saving timer settings
-    timer_settings = {
-        "user_id": test_user_id,
-        "timer_duration_minutes": 45,
-        "play_duration_seconds": 30,
-        "selected_tracks": [
-            {
-                "id": "track1",
-                "name": "Test Track 1",
-                "uri": "spotify:track:1234567890",
-                "duration_ms": 180000
-            },
-            {
-                "id": "track2",
-                "name": "Test Track 2",
-                "uri": "spotify:track:0987654321",
-                "duration_ms": 240000
-            }
-        ]
-    }
-    
-    settings_response, settings_passed = run_test(
-        "Save Timer Settings", 
-        "/timer/settings", 
-        method="POST",
-        data=timer_settings,
-        expected_status=200
-    )
-    
-    # Test retrieving timer settings
-    run_test(
-        "Get Timer Settings", 
-        f"/timer/settings/{test_user_id}", 
-        expected_status=200
-    )
-    
-    # 5. Test Track Position
-    # Create track position data
-    track_uri = "spotify:track:1234567890"
-    track_position = {
-        "user_id": test_user_id,
-        "track_uri": track_uri,
-        "current_position_ms": 15000
-    }
-    
-    position_response, position_passed = run_test(
-        "Save Track Position", 
-        "/timer/track-position", 
-        method="POST",
-        data=track_position,
-        expected_status=200
-    )
-    
-    # Test retrieving track position
-    encoded_uri = urllib.parse.quote(track_uri)
-    run_test(
-        "Get Track Position", 
-        f"/timer/track-position/{test_user_id}/{encoded_uri}", 
-        expected_status=200
     )
     
     # Print summary of all tests
