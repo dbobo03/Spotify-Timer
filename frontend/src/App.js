@@ -249,8 +249,19 @@ const SpotifyTimer = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.get(`${API}/auth/login`);
-      window.location.href = response.data.auth_url;
+      // Direct Spotify OAuth (PKCE flow)
+      const clientId = 'b8df048a15f4402a866d7253a435139e';
+      const redirectUri = 'https://spotify-timer.vercel.app';
+      const scopes = 'user-read-playback-state user-modify-playback-state user-read-private streaming user-read-email';
+      
+      const authUrl = `https://accounts.spotify.com/authorize?` +
+        `client_id=${clientId}&` +
+        `response_type=token&` +
+        `redirect_uri=${encodeURIComponent(redirectUri)}&` +
+        `scope=${encodeURIComponent(scopes)}&` +
+        `show_dialog=true`;
+      
+      window.location.href = authUrl;
     } catch (error) {
       console.error('Login error:', error);
       alert('Failed to start login process');
