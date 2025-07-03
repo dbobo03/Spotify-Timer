@@ -311,8 +311,6 @@ metadata:
 test_plan:
   current_focus:
     - "Frontend-Only Spotify Authentication"
-    - "Calendar and Schedule Features with Storage"
-    - "Timer Functionality"
   stuck_tasks:
     - "Frontend-Only Spotify Authentication"
   test_all: false
@@ -321,3 +319,5 @@ test_plan:
 agent_communication:
   - agent: "main"
     message: "Switched to frontend-only architecture. Removed all backend Python dependencies to resolve 250MB limit on Vercel. Spotify authentication now uses implicit flow with hash tokens. Login flow works until token callback, then shows white page. Need to diagnose JavaScript errors and test storage integration for calendar/schedule features."
+  - agent: "testing"
+    message: "Identified the root cause of the white page issue after Spotify login. The app correctly parses the token from URL hash and stores it in localStorage, but then crashes with 'ReferenceError: axios is not defined'. This happens because axios is referenced in the code but not properly imported or bundled in the production build. The Calendar and Schedule features work correctly without login, with data properly persisting in localStorage. Timer settings UI also works correctly. Fix needed: Ensure axios is properly imported in all files where it's used or switch to using fetch API instead."
