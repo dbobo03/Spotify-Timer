@@ -109,7 +109,7 @@ frontend:
     implemented: true
     working: false
     file: "App.js"
-    stuck_count: 1
+    stuck_count: 2
     priority: "high"
     needs_retesting: false
     status_history:
@@ -119,6 +119,9 @@ frontend:
       - working: false
         agent: "testing"
         comment: "Identified the issue causing the white page after login. The app is correctly parsing the token from the URL hash and storing it in localStorage, but then crashes with 'ReferenceError: axios is not defined'. The app uses axios for API calls but it's not properly imported or bundled in the production build. This is causing the app to crash when it tries to make API calls after login."
+      - working: false
+        agent: "testing"
+        comment: "After testing the latest fixes, the app still shows a white page after Spotify login. The previous axios issue appears to be fixed (axios is no longer undefined in the global scope), but now there's a new error: 'setupAbsoluteTimeMonitoring is not defined'. This function is called in the useEffect hook after the access token is set, but it's not defined in the code. The React root element is empty, indicating the app crashes during initialization."
 
   - task: "Calendar and Schedule Features with Storage"
     implemented: true
