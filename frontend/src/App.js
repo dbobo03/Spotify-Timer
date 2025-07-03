@@ -174,7 +174,6 @@ const SpotifyTimer = () => {
       loadUserProfile();
       loadDevices();
       loadTimerSettings();
-      setupAbsoluteTimeMonitoring();
       setIsLoggedIn(true);
     }
   }, [accessToken]);
