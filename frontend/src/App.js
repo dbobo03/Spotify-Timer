@@ -315,15 +315,15 @@ const SpotifyTimer = () => {
   };
 
   const loadTimerSettings = async () => {
-    if (!user?.id) return;
-    
     try {
-      const response = await axios.get(`${API}/timer/settings/${user.id}`);
-      const settings = response.data;
-      
-      setTimerDuration(settings.timer_duration_minutes);
-      setPlayDuration(settings.play_duration_seconds);
-      setSelectedTracks(settings.selected_tracks);
+      // Use localStorage for settings (no backend needed)
+      const settings = localStorage.getItem('timer_settings');
+      if (settings) {
+        const parsedSettings = JSON.parse(settings);
+        setTimerDurationMinutes(parsedSettings.timer_duration_minutes || 30);
+        setPlayDurationSeconds(parsedSettings.play_duration_seconds || 30);
+        setSelectedTracks(parsedSettings.selected_tracks || []);
+      }
     } catch (error) {
       console.error('Failed to load timer settings:', error);
     }
