@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import RedirectResponse
+from mangum import Mangum
 import os
 import requests
 import urllib.parse
@@ -69,6 +70,5 @@ async def spotify_callback(code: str):
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Authentication failed: {str(e)}")
 
-# For Vercel
-def handler(event, context):
-    return app(event, context)
+# Vercel handler
+handler = Mangum(app)
