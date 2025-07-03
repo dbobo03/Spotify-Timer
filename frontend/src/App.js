@@ -243,25 +243,9 @@ const SpotifyTimer = () => {
   };
 
   // Timer and authentication functions (same as before but moved down)
+  // No longer needed - handled by URL hash parsing
   const handleAuthCallback = async (code) => {
-    try {
-      const response = await axios.get(`${API}/auth/callback?code=${code}`);
-      const { access_token, refresh_token } = response.data;
-      
-      setAccessToken(access_token);
-      setRefreshToken(refresh_token);
-      setIsLoggedIn(true);
-      
-      localStorage.setItem('spotify_access_token', access_token);
-      localStorage.setItem('spotify_refresh_token', refresh_token);
-      
-      // Clean up URL and redirect to timer
-      window.history.replaceState({}, document.title, '/');
-      setActiveTab('timer');
-    } catch (error) {
-      console.error('Auth callback error:', error);
-      alert('Authentication failed. Please try again.');
-    }
+    console.log('Auth callback deprecated - using direct token flow');
   };
 
   const handleLogin = async () => {
