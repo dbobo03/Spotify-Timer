@@ -349,12 +349,27 @@ const SpotifyTimer = () => {
     setIsSearching(true);
     try {
       if (searchType === 'tracks') {
-        const response = await axios.get(`${API}/spotify/search?q=${encodeURIComponent(searchQuery)}&access_token=${accessToken}`);
-        setSearchResults(response.data.tracks || []);
-      } else if (searchType === 'playlists') {
-        // Search for playlists
-        const response = await axios.get(`${API}/spotify/search-playlists?q=${encodeURIComponent(searchQuery)}&access_token=${accessToken}`);
-        setSearchResults(response.data.playlists || []);
+        const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=track&limit=10`, {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`
+          }
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          setSearchResults(data.tracks.items);
+        }
+      } else {
+        const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=playlist&limit=10`, {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`
+          }
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          setSearchResults(data.playlists.items);
+        }
       }
     } catch (error) {
       console.error('Search failed:', error);
