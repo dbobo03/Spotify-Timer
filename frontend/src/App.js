@@ -1122,7 +1122,87 @@ const SpotifyTimer = () => {
     };
   }, []);
 
-  // Timer logic
+  // Automatic Schedule Monitoring
+  useEffect(() => {
+    // Start monitoring scheduled times every minute
+    const scheduleMonitor = setInterval(() => {
+      checkScheduledPlayback();
+    }, 60000); // Check every minute
+
+    // Also check immediately
+    checkScheduledPlayback();
+
+    return () => clearInterval(scheduleMonitor);
+  }, [weeklySchedule, calendarSchedule, selectedTracks, selectedPlaylists, accessToken]);
+
+  const checkScheduledPlayback = () => {
+    if (!accessToken || isTimerRunning || isPlaying) {
+      // Don't interfere with manual timer or current playback
+      return;
+    }
+
+    const now = new Date();
+    const currentDay = DAYS[now.getDay() === 0 ? 6 : now.getDay() - 1]; // Convert Sunday=0 to our array
+    const currentTime = `${now.getHours().toString().padStart(2, '0')}:${Math.floor(now.getMinutes() / 30) * 30 === now.getMinutes() ? now.getMinutes().toString().padStart(2, '0') : Math.floor(now.getMinutes() / 30) * 30}`;
+    const currentDateKey = formatDateKey(now);
+
+    let shouldPlay = false;
+
+    // Check calendar schedule first (takes priority)
+    if (calendarSchedule[currentDateKey]) {
+      if (calendarSchedule[currentDateKey].wholeDay) {
+        shouldPlay = true;
+      } else if (calendarSchedule[currentDateKey].timeSlots?.[currentTime]) {
+        shouldPlay = true;
+      }
+    }
+    // Check weekly schedule if no calendar override
+    else if (weeklySchedule[currentDay]) {
+      if (weeklySchedule[currentDay].wholeDay) {
+        shouldPlay = true;
+      } else if (weeklySchedule[currentDay].timeSlots?.[currentTime]) {
+        shouldPlay = true;
+      }
+    }
+
+    if (shouldPlay) {
+      triggerScheduledPlayback();
+    }
+  };
+
+  const triggerScheduledPlayback = async () => {
+    if (selectedTracks.length === 0 && selectedPlaylists.length === 0) {
+      showNotification('Scheduled time reached!', 'No music selected - please add tracks or playlists');
+      return;
+    }
+
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('en-US', { 
+      hour: '2-digit', 
+      minute: '2-digit',
+      hour12: true 
+    });
+
+    showNotification(
+      `🎵 Scheduled Music Time! ${timeString}`, 
+      `Playing your music for ${playDuration} seconds`
+    );
+
+    // Set playing state and trigger music
+    setIsPlaying(true);
+    
+    try {
+      await playCurrentTrack();
+    } catch (error) {
+      console.error('Scheduled playback failed:', error);
+      showNotification('Playback failed', 'Please check your Spotify connection and premium status');
+      setIsPlaying(false);
+    }
+  };
+
+  const formatDateKey = (date) => {
+    return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+  };
   useEffect(() => {
     if (isTimerRunning && timeRemaining > 0) {
       timerIntervalRef.current = setInterval(() => {
