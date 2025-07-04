@@ -319,8 +319,8 @@ const SpotifyTimer = () => {
       const settings = localStorage.getItem('timer_settings');
       if (settings) {
         const parsedSettings = JSON.parse(settings);
-        setTimerDurationMinutes(parsedSettings.timer_duration_minutes || 30);
-        setPlayDurationSeconds(parsedSettings.play_duration_seconds || 30);
+        setTimerDuration(parsedSettings.timer_duration_minutes || 30);
+        setPlayDuration(parsedSettings.play_duration_seconds || 30);
         setSelectedTracks(parsedSettings.selected_tracks || []);
       }
     } catch (error) {
