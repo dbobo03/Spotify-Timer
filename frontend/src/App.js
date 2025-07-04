@@ -1539,17 +1539,39 @@ const SpotifyTimer = () => {
         </div>
       )}
 
-      {/* Schedule Tab - Automatic scheduling with playlist selection */}
+      {/* Advanced Schedule Tab - Layered scheduling system */}
       {activeTab === 'schedule' && (
         <div className="schedule-section">
           <div className="section-description">
-            <h3>📅 Automatic Scheduling</h3>
-            <p>Set when your music should play automatically! Select playlists below, then set your schedule. The system will remember where it left off in each playlist.</p>
+            <h3>📅 Advanced Scheduling System</h3>
+            <p>Set up your default weekly pattern, then block specific dates or add custom overrides without affecting your base schedule!</p>
+          </div>
+
+          {/* Schedule Management Tabs */}
+          <div className="schedule-view-navigation">
+            <button 
+              className={activeScheduleView === 'base' ? 'schedule-tab-btn active' : 'schedule-tab-btn'}
+              onClick={() => setActiveScheduleView('base')}
+            >
+              📊 Base Weekly Schedule
+            </button>
+            <button 
+              className={activeScheduleView === 'overrides' ? 'schedule-tab-btn active' : 'schedule-tab-btn'}
+              onClick={() => setActiveScheduleView('overrides')}
+            >
+              📝 Date Overrides
+            </button>
+            <button 
+              className={activeScheduleView === 'blocked' ? 'schedule-tab-btn active' : 'schedule-tab-btn'}
+              onClick={() => setActiveScheduleView('blocked')}
+            >
+              🚫 Blocked Dates
+            </button>
           </div>
 
           {/* Scheduled Playlists Section */}
           <div className="scheduled-playlists-section">
-            <h4>🎵 Playlists for Scheduled Playback</h4>
+            <h4>🎵 Playlists for Automatic Scheduling</h4>
             <p className="feature-description">
               Select playlists that will play during your scheduled times. The system remembers where it stopped in each playlist and continues from there.
             </p>
@@ -1624,25 +1646,80 @@ const SpotifyTimer = () => {
             )}
           </div>
 
-          <div className="schedule-header">
-            <h4>⏰ Time Schedule Configuration</h4>
-            <p>Choose when your selected playlists should play automatically. Calendar dates override weekly patterns.</p>
-            
-            <div className="schedule-type-toggle">
-              <button
-                onClick={() => setScheduleType('weekly')}
-                className={scheduleType === 'weekly' ? 'toggle-btn active' : 'toggle-btn'}
-              >
-                Weekly Pattern
-              </button>
-              <button
-                onClick={() => setScheduleType('calendar')}
-                className={scheduleType === 'calendar' ? 'toggle-btn active' : 'toggle-btn'}
-              >
-                Calendar View
-              </button>
+          {/* Base Weekly Schedule View */}
+          {activeScheduleView === 'base' && (
+            <div className="base-schedule-section">
+              <h4>📊 Base Weekly Schedule</h4>
+              <p className="feature-description">
+                This is your default weekly pattern that repeats every week. It won't be affected by blocking specific dates or adding overrides.
+              </p>
+              
+              <div className="weekly-schedule">
+                <div className="schedule-header-weekly">
+                  <div className="time-label">Time</div>
+                  {DAYS.map(day => (
+                    <div key={day} className="day-header">
+                      <div className="day-name">{day.substring(0, 3)}</div>
+                      <label className="whole-day-checkbox">
+                        <input
+                          type="checkbox"
+                          checked={baseWeeklySchedule[day]?.wholeDay || false}
+                          onChange={() => setBaseWholeDay(day, !baseWeeklySchedule[day]?.wholeDay)}
+                        />
+                        All Day
+                      </label>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="schedule-grid">
+                  {TIME_SLOTS.map(timeSlot => (
+                    <div key={timeSlot} className="schedule-row">
+                      <div className="time-slot-label">{timeSlot}</div>
+                      {DAYS.map(day => (
+                        <div key={`${day}-${timeSlot}`} className="schedule-cell">
+                          <input
+                            type="checkbox"
+                            checked={baseWeeklySchedule[day]?.timeSlots?.[timeSlot] || false}
+                            onChange={() => setBaseScheduleSlot(day, timeSlot, !baseWeeklySchedule[day]?.timeSlots?.[timeSlot])}
+                            className="schedule-checkbox"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
+          )}
+
+          {/* Date Overrides View */}
+          {activeScheduleView === 'overrides' && (
+            <div className="overrides-section">
+              <h4>📝 Date Overrides</h4>
+              <p className="feature-description">
+                Set custom schedules for specific dates. These override your base weekly schedule for those dates only.
+              </p>
+              <div className="override-management">
+                <p>Coming soon: Visual calendar for date override management</p>
+              </div>
+            </div>
+          )}
+
+          {/* Blocked Dates View */}
+          {activeScheduleView === 'blocked' && (
+            <div className="blocked-section">
+              <h4>🚫 Blocked Dates</h4>
+              <p className="feature-description">
+                Block specific dates when you don't want any music. Your base schedule remains unchanged - just click unblock to restore.
+              </p>
+              <div className="blocked-management">
+                <p>Coming soon: Visual calendar for blocking/unblocking dates</p>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
           {scheduleType === 'weekly' && (
             <div className="weekly-schedule-section">
