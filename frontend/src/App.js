@@ -1029,7 +1029,6 @@ const SpotifyTimer = () => {
                 </div>
               </div>
             )}
-          </div>
         )}
       </div>
     );
