@@ -81,11 +81,12 @@ const SpotifyTimer = () => {
   // Enhanced features
   const [activeTab, setActiveTab] = useState('welcome'); // welcome, timer, schedule, tracks, playlists
   const [scheduleType, setScheduleType] = useState('weekly'); // 'weekly' or 'calendar'
-  // Enhanced scheduling state
-  const [baseWeeklySchedule, setBaseWeeklySchedule] = useState({}); // The default pattern
+  // Enhanced scheduling state - layered system
+  const [baseWeeklySchedule, setBaseWeeklySchedule] = useState({}); // The default repeating pattern
   const [dateOverrides, setDateOverrides] = useState({}); // Custom schedules for specific dates
-  const [blockedDates, setBlockedDates] = useState(new Set()); // Completely blocked dates
-  const [scheduleExceptions, setScheduleExceptions] = useState({}); // Advanced exceptions
+  const [blockedDates, setBlockedDates] = useState(new Set()); // Completely blocked dates  
+  const [weeklySchedule, setWeeklySchedule] = useState({}); // Backwards compatibility
+  const [calendarSchedule, setCalendarSchedule] = useState({}); // Backwards compatibility
   const [activeScheduleView, setActiveScheduleView] = useState('base'); // 'base', 'overrides', 'blocked'
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
