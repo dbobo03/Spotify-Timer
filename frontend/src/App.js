@@ -643,8 +643,6 @@ const SpotifyTimer = () => {
     return { base: true, schedule: baseSchedule };
   };
 
-  const formatDateKey = (date) => {
-
   const toggleCalendarScheduleSlot = (date, timeSlot) => {
     const dateKey = formatDateKey(date);
     setCalendarSchedule(prev => ({
