@@ -1031,12 +1031,11 @@ const SpotifyTimer = () => {
             )}
           </div>
         )}
+      </div>
+    );
+  }
 
-        {/* Settings Panel (accessible without login) */}
-        {showSettings && (
-          <div className="settings-panel">
-            <h3>Timer Settings</h3>
-            <p>Configure your preferences (saved locally)</p>
+  // Main logged-in interface
             
             {/* Timer Mode Toggle */}
             <div className="setting-group">
