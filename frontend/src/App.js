@@ -223,7 +223,10 @@ const SpotifyTimer = () => {
         absoluteTimeMode,
         absoluteTimeSlots,
         selectedTracks,
-        selectedPlaylists
+        selectedPlaylists,
+        scheduledPlaylists,
+        playlistPositions,
+        trackPositions
       };
       localStorage.setItem('spotify_timer_settings', JSON.stringify(settings));
     } catch (error) {
