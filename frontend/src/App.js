@@ -492,6 +492,53 @@ const SpotifyTimer = () => {
     }
   };
 
+  const searchPlaylists = async () => {
+    if (!searchQuery.trim() || !accessToken) return;
+    
+    setIsSearching(true);
+    setSearchType('playlists');
+    try {
+      const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=playlist&limit=10`, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setSearchResults(data.playlists.items);
+      }
+    } catch (error) {
+      console.error('Playlist search failed:', error);
+      alert('Playlist search failed. Please log in to Spotify first.');
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
+  const removeTrack = (selectionId) => {
+    const newTracks = selectedTracks.filter(track => track.selectionId !== selectionId);
+    setSelectedTracks(newTracks);
+    if (accessToken) saveTimerSettings();
+  };
+
+  const selectScheduledPlaylist = (playlist) => {
+    if (scheduledPlaylists.find(p => p.id === playlist.id)) {
+      alert('Playlist already selected for scheduled playback');
+      return;
+    }
+    
+    const newPlaylists = [...scheduledPlaylists, playlist];
+    setScheduledPlaylists(newPlaylists);
+    if (accessToken) saveLocalSettings();
+  };
+
+  const removeScheduledPlaylist = (playlistId) => {
+    const newPlaylists = scheduledPlaylists.filter(playlist => playlist.id !== playlistId);
+    setScheduledPlaylists(newPlaylists);
+    if (accessToken) saveLocalSettings();
+  };
+
   const selectPlaylist = (playlist) => {
     if (selectedPlaylists.find(p => p.id === playlist.id)) {
       alert('Playlist already selected');
