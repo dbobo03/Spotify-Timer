@@ -9,6 +9,70 @@
   margin: 0 auto;
 }
 
+/* Tracks and Playlists sections */
+.track-selection,
+.playlist-selection,
+.schedule-section {
+  background: #0f0f0f;
+  border-radius: 15px;
+  padding: 25px;
+  border: 1px solid #333;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.track-selection h3,
+.playlist-selection h3,
+.schedule-section h3 {
+  color: #1DB954;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-section {
+  margin-bottom: 25px;
+}
+
+.search-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.search-input input {
+  flex: 1;
+  background: #333;
+  border: 1px solid #555;
+  color: white;
+  padding: 12px 15px;
+  border-radius: 8px;
+  font-size: 0.9em;
+}
+
+.search-input input::placeholder {
+  color: #B3B3B3;
+}
+
+.search-input button {
+  background: #1DB954;
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.search-input button:hover:not(:disabled) {
+  background: #1ed760;
+  transform: translateY(-2px);
+}
+
+.search-input button:disabled {
+  background: #666;
+  cursor: not-allowed;
+}
+
 /* Header improvements */
 .header {
   background: #0f0f0f;
