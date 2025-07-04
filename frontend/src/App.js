@@ -413,7 +413,7 @@ const SpotifyTimer = () => {
     if (accessToken) saveTimerSettings();
   };
 
-  const selectPlaylist = (playlist) => {
+  const selectScheduledPlaylist = (playlist) => {
     if (scheduledPlaylists.find(p => p.id === playlist.id)) {
       alert('Playlist already selected for scheduled playback');
       return;
