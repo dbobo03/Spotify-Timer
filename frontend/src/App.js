@@ -413,29 +413,6 @@ const SpotifyTimer = () => {
     if (accessToken) saveTimerSettings();
   };
 
-  const removeTrack = (selectionId) => {
-    const newTracks = selectedTracks.filter(track => track.selectionId !== selectionId);
-    setSelectedTracks(newTracks);
-    if (accessToken) saveTimerSettings();
-  };
-
-  const selectScheduledPlaylist = (playlist) => {
-    if (scheduledPlaylists.find(p => p.id === playlist.id)) {
-      alert('Playlist already selected for scheduled playback');
-      return;
-    }
-    
-    const newPlaylists = [...scheduledPlaylists, playlist];
-    setScheduledPlaylists(newPlaylists);
-    if (accessToken) saveLocalSettings();
-  };
-
-  const removeScheduledPlaylist = (playlistId) => {
-    const newPlaylists = scheduledPlaylists.filter(playlist => playlist.id !== playlistId);
-    setScheduledPlaylists(newPlaylists);
-    if (accessToken) saveLocalSettings();
-  };
-
   const searchPlaylists = async () => {
     if (!searchQuery.trim() || !accessToken) return;
     
