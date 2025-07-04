@@ -561,6 +561,88 @@ const SpotifyTimer = () => {
     return { base: true, schedule: baseSchedule };
   };
 
+  // Advanced scheduling functions
+  const setBaseScheduleSlot = (day, timeSlot, enabled) => {
+    setBaseWeeklySchedule(prev => ({
+      ...prev,
+      [day]: {
+        ...prev[day],
+        timeSlots: {
+          ...prev[day]?.timeSlots,
+          [timeSlot]: enabled
+        }
+      }
+    }));
+  };
+
+  const setBaseWholeDay = (day, enabled) => {
+    setBaseWeeklySchedule(prev => {
+      const newTimeSlots = {};
+      TIME_SLOTS.forEach(slot => {
+        newTimeSlots[slot] = enabled;
+      });
+      
+      return {
+        ...prev,
+        [day]: {
+          wholeDay: enabled,
+          timeSlots: newTimeSlots
+        }
+      };
+    });
+  };
+
+  const blockDate = (date) => {
+    const dateKey = formatDateKey(date);
+    setBlockedDates(prev => new Set([...prev, dateKey]));
+  };
+
+  const unblockDate = (date) => {
+    const dateKey = formatDateKey(date);
+    setBlockedDates(prev => {
+      const newSet = new Set(prev);
+      newSet.delete(dateKey);
+      return newSet;
+    });
+  };
+
+  const setDateOverride = (date, schedule) => {
+    const dateKey = formatDateKey(date);
+    setDateOverrides(prev => ({
+      ...prev,
+      [dateKey]: schedule
+    }));
+  };
+
+  const removeDateOverride = (date) => {
+    const dateKey = formatDateKey(date);
+    setDateOverrides(prev => {
+      const newOverrides = { ...prev };
+      delete newOverrides[dateKey];
+      return newOverrides;
+    });
+  };
+
+  const getEffectiveSchedule = (date) => {
+    const dateKey = formatDateKey(date);
+    
+    // Check if date is blocked
+    if (blockedDates.has(dateKey)) {
+      return { blocked: true };
+    }
+    
+    // Check if date has override
+    if (dateOverrides[dateKey]) {
+      return { override: true, schedule: dateOverrides[dateKey] };
+    }
+    
+    // Use base weekly schedule
+    const dayName = DAYS[date.getDay() === 0 ? 6 : date.getDay() - 1];
+    const baseSchedule = baseWeeklySchedule[dayName];
+    
+    return { base: true, schedule: baseSchedule };
+  };
+
   const formatDateKey = (date) => {
 
   const toggleCalendarScheduleSlot = (date, timeSlot) => {
