@@ -382,17 +382,18 @@ const SpotifyTimer = () => {
   };
 
   const selectTrack = (track) => {
-    if (selectedTracks.length >= 10) {
-      alert('You can select up to 10 tracks');
+    if (selectedTracks.length >= 20) {
+      alert('You can select up to 20 tracks for the manual timer');
       return;
     }
     
-    if (selectedTracks.find(t => t.id === track.id)) {
-      alert('Track already selected');
-      return;
-    }
+    // Allow duplicates - add each selection as a new entry
+    const trackWithId = {
+      ...track,
+      selectionId: `${track.id}_${Date.now()}_${selectedTracks.length}` // unique selection ID
+    };
     
-    const newTracks = [...selectedTracks, track];
+    const newTracks = [...selectedTracks, trackWithId];
     setSelectedTracks(newTracks);
     if (accessToken) saveTimerSettings();
   };
