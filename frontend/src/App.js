@@ -813,26 +813,7 @@ const SpotifyTimer = () => {
     );
   };
 
-  // Timer and playback functions
-  // Timer logic
-  useEffect(() => {
-    if (isTimerRunning && timeRemaining > 0) {
-      timerIntervalRef.current = setInterval(() => {
-        setTimeRemaining(prev => {
-          if (prev <= 1) {
-            // Timer expired - trigger music playback
-            triggerMusicPlayback();
-            return timerDuration * 60; // Reset timer
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    } else {
-      clearInterval(timerIntervalRef.current);
-    }
-
-    return () => clearInterval(timerIntervalRef.current);
-  }, [isTimerRunning, timeRemaining, timerDuration]);
+  // If user doesn't have premium, show upgrade message
 
   // Music playback logic
   useEffect(() => {
