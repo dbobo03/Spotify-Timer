@@ -200,6 +200,9 @@ const SpotifyTimer = () => {
         setAbsoluteTimeSlots(settings.absoluteTimeSlots || { hourly: false, halfHourly: false, custom: {} });
         setSelectedTracks(settings.selectedTracks || []);
         setSelectedPlaylists(settings.selectedPlaylists || []);
+        setScheduledPlaylists(settings.scheduledPlaylists || []);
+        setPlaylistPositions(settings.playlistPositions || {});
+        setTrackPositions(settings.trackPositions || {});
       }
     } catch (error) {
       console.error('Error loading local settings:', error);
