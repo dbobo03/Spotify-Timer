@@ -229,6 +229,9 @@ const SpotifyTimer = () => {
         trackPositions,
         scheduledPlaylists,
         playlistPositions,
+        trackPositions,
+        scheduledPlaylists,
+        playlistPositions,
         trackPositions
       };
       localStorage.setItem('spotify_timer_settings', JSON.stringify(settings));
