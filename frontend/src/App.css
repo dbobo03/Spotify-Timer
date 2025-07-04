@@ -73,6 +73,167 @@
   cursor: not-allowed;
 }
 
+/* Track and Playlist items */
+.track-item,
+.playlist-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: #1a1a1a;
+  border-radius: 8px;
+  border: 1px solid #333;
+  transition: all 0.3s ease;
+}
+
+.track-item:hover,
+.playlist-item:hover {
+  background: #2a2a2a;
+  border-color: #1DB954;
+}
+
+.track-number,
+.playlist-number {
+  background: #1DB954;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.track-image-small,
+.playlist-image-small {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.track-info,
+.playlist-info {
+  flex: 1;
+}
+
+.track-name,
+.playlist-name {
+  color: white;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.track-artist,
+.playlist-description {
+  color: #B3B3B3;
+  font-size: 0.8em;
+}
+
+.playlist-tracks {
+  color: #1DB954;
+  font-size: 0.7em;
+  margin-top: 2px;
+}
+
+.select-btn,
+.remove-btn {
+  background: #1DB954;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8em;
+  transition: all 0.3s ease;
+}
+
+.select-btn:hover {
+  background: #1ed760;
+}
+
+.select-btn:disabled {
+  background: #666;
+  cursor: not-allowed;
+}
+
+.remove-btn {
+  background: #e22134;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.remove-btn:hover {
+  background: #ff1e34;
+}
+
+/* Selected tracks/playlists sections */
+.selected-tracks,
+.selected-playlists {
+  margin-bottom: 25px;
+}
+
+.selected-tracks h4,
+.selected-playlists h4 {
+  color: #1DB954;
+  margin-bottom: 15px;
+}
+
+/* Search results */
+.search-results {
+  margin-top: 20px;
+}
+
+.search-results h4 {
+  color: #1DB954;
+  margin-bottom: 15px;
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 768px) {
+  .track-selection,
+  .playlist-selection,
+  .schedule-section {
+    padding: 20px 15px;
+  }
+  
+  .search-input {
+    flex-direction: column;
+  }
+  
+  .search-input button {
+    padding: 10px;
+  }
+  
+  .track-item,
+  .playlist-item {
+    padding: 10px;
+    gap: 10px;
+  }
+  
+  .track-image-small,
+  .playlist-image-small {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .track-name,
+  .playlist-name {
+    font-size: 0.9em;
+  }
+  
+  .track-artist,
+  .playlist-description {
+    font-size: 0.75em;
+  }
+}
+
 /* Header improvements */
 .header {
   background: #0f0f0f;
