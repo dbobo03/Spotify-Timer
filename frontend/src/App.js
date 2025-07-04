@@ -506,26 +506,7 @@ const SpotifyTimer = () => {
     );
   };
 
-  // Rest of the timer and playback functions...
-  const playCurrentTrack = async () => {
-    if (!accessToken) {
-      alert('Please log in to Spotify to play music');
-      setActiveTab('welcome');
-      return;
-    }
-
-    if (selectedTracks.length === 0 && selectedPlaylists.length === 0) {
-      if (notificationsEnabled) {
-        new Notification('Spotify Timer', {
-          body: 'Please select at least one track or playlist',
-          icon: '/favicon.ico'
-        });
-      }
-      return;
-    }
-    
-    // Implementation continues...
-    // (Same playback logic as before)
+  // Timer and playback functions
   };
 
   const formatTime = (seconds) => {
