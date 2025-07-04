@@ -1542,7 +1542,13 @@ const SpotifyTimer = () => {
           className={activeTab === 'schedule' ? 'tab-btn active' : 'tab-btn'}
           onClick={() => setActiveTab('schedule')}
         >
-          Schedule
+          Advanced Schedule
+        </button>
+        <button 
+          className={activeTab === 'calendar' ? 'tab-btn active' : 'tab-btn'}
+          onClick={() => setActiveTab('calendar')}
+        >
+          Calendar Manager
         </button>
         <button 
           className={activeTab === 'tracks' ? 'tab-btn active' : 'tab-btn'}
