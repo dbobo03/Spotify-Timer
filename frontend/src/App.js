@@ -1547,13 +1547,18 @@ const SpotifyTimer = () => {
       {/* Timer Tab */}
       {activeTab === 'timer' && (
         <div className="timer-section">
+          <div className="section-description">
+            <h3>🎯 Manual Timer</h3>
+            <p>Set a custom timer and play your selected tracks when it expires. Perfect for pomodoro sessions or quick breaks!</p>
+          </div>
+
           {/* Timer Display */}
           <div className="timer-display">
             <div className="time-remaining">
               {timeRemaining === 0 && isPlaying ? 'PLAYING...' : formatTime(timeRemaining)}
             </div>
             <div className="timer-info">
-              Timer: {timerDuration >= 1 ? `${timerDuration} min` : `${Math.round(timerDuration * 60)}s`} | Play: {playDuration}s | Items: {selectedTracks.length + selectedPlaylists.length}
+              Timer: {timerDuration >= 1 ? `${timerDuration} min` : `${Math.round(timerDuration * 60)}s`} | Play: {playDuration}s | Selected: {selectedTracks.length}/20 tracks
             </div>
             {(Object.keys(weeklySchedule).some(day => weeklySchedule[day]?.wholeDay || Object.keys(weeklySchedule[day]?.timeSlots || {}).length > 0) ||
               Object.keys(calendarSchedule).length > 0) && (
@@ -1567,7 +1572,7 @@ const SpotifyTimer = () => {
           <div className="controls">
             <button 
               onClick={() => setIsTimerRunning(true)} 
-              disabled={isTimerRunning || (selectedTracks.length === 0 && selectedPlaylists.length === 0)}
+              disabled={isTimerRunning || selectedTracks.length === 0}
               className="control-btn start-btn"
             >
               START
@@ -1589,6 +1594,75 @@ const SpotifyTimer = () => {
             >
               FULL STOP
             </button>
+          </div>
+
+          {/* Manual Timer Track Selection */}
+          <div className="manual-track-selection">
+            <h4>🎵 Track Selection (Up to 20 tracks)</h4>
+            <p className="feature-description">
+              Select individual tracks for your manual timer. You can choose the same song multiple times, and tracks will play in order when the timer expires.
+            </p>
+            
+            {/* Search */}
+            <div className="search-section">
+              <div className="search-input">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search for tracks..."
+                  onKeyPress={(e) => e.key === 'Enter' && searchTracks()}
+                />
+                <button onClick={searchTracks} disabled={isSearching}>
+                  {isSearching ? 'Searching...' : 'Search'}
+                </button>
+              </div>
+            </div>
+
+            {/* Selected Tracks for Manual Timer */}
+            {selectedTracks.length > 0 && (
+              <div className="selected-tracks">
+                <h5>Your Manual Timer Tracks ({selectedTracks.length}/20):</h5>
+                {selectedTracks.map((track, index) => (
+                  <div key={track.selectionId} className="track-item selected">
+                    <span className="track-number">{index + 1}.</span>
+                    {track.album?.images?.[2] && (
+                      <img src={track.album.images[2].url} alt={track.name} className="track-image-small" />
+                    )}
+                    <div className="track-info">
+                      <div className="track-name">{track.name}</div>
+                      <div className="track-artist">{track.artists?.map(a => a.name).join(', ')}</div>
+                    </div>
+                    <button onClick={() => removeTrack(track.selectionId)} className="remove-btn">×</button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Search Results for Manual Timer */}
+            {searchResults.length > 0 && searchType === 'tracks' && (
+              <div className="search-results">
+                <h5>Search Results (click to add to manual timer):</h5>
+                {searchResults.map((track) => (
+                  <div key={track.id} className="track-item">
+                    {track.album?.images?.[2] && (
+                      <img src={track.album.images[2].url} alt={track.name} className="track-image-small" />
+                    )}
+                    <div className="track-info">
+                      <div className="track-name">{track.name}</div>
+                      <div className="track-artist">{track.artists?.map(a => a.name).join(', ')}</div>
+                    </div>
+                    <button 
+                      onClick={() => selectTrack(track)} 
+                      disabled={selectedTracks.length >= 20}
+                      className="select-btn"
+                    >
+                      {selectedTracks.length >= 20 ? 'Full' : 'Add'}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       )}
