@@ -1667,12 +1667,94 @@ const SpotifyTimer = () => {
         </div>
       )}
 
-      {/* Schedule Tab - Same as in logged-out state but with additional features */}
+      {/* Schedule Tab - Automatic scheduling with playlist selection */}
       {activeTab === 'schedule' && (
         <div className="schedule-section">
+          <div className="section-description">
+            <h3>📅 Automatic Scheduling</h3>
+            <p>Set when your music should play automatically! Select playlists below, then set your schedule. The system will remember where it left off in each playlist.</p>
+          </div>
+
+          {/* Scheduled Playlists Section */}
+          <div className="scheduled-playlists-section">
+            <h4>🎵 Playlists for Scheduled Playback</h4>
+            <p className="feature-description">
+              Select playlists that will play during your scheduled times. The system remembers where it stopped in each playlist and continues from there.
+            </p>
+
+            {/* Playlist Search */}
+            <div className="search-section">
+              <div className="search-input">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search for playlists..."
+                  onKeyPress={(e) => e.key === 'Enter' && searchPlaylists()}
+                />
+                <button onClick={searchPlaylists} disabled={isSearching}>
+                  {isSearching ? 'Searching...' : 'Search'}
+                </button>
+              </div>
+            </div>
+
+            {/* Selected Scheduled Playlists */}
+            {scheduledPlaylists.length > 0 && (
+              <div className="selected-playlists">
+                <h5>Your Scheduled Playlists ({scheduledPlaylists.length}):</h5>
+                {scheduledPlaylists.map((playlist, index) => (
+                  <div key={playlist.id} className="playlist-item selected">
+                    <span className="playlist-number">{index + 1}.</span>
+                    {playlist.images?.[0] && (
+                      <img src={playlist.images[0].url} alt={playlist.name} className="playlist-image-small" />
+                    )}
+                    <div className="playlist-info">
+                      <div className="playlist-name">{playlist.name}</div>
+                      <div className="playlist-description">{playlist.description || 'No description'}</div>
+                      <div className="playlist-tracks">{playlist.tracks?.total || 0} tracks</div>
+                    </div>
+                    <button onClick={() => removeScheduledPlaylist(playlist.id)} className="remove-btn">×</button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Playlist Search Results */}
+            {searchResults.length > 0 && searchType === 'playlists' && (
+              <div className="search-results">
+                <h5>Search Results (click to add for scheduled playback):</h5>
+                {searchResults.map((playlist) => (
+                  <div key={playlist.id} className="playlist-item">
+                    {playlist.images?.[0] && (
+                      <img src={playlist.images[0].url} alt={playlist.name} className="playlist-image-small" />
+                    )}
+                    <div className="playlist-info">
+                      <div className="playlist-name">{playlist.name}</div>
+                      <div className="playlist-description">{playlist.description || 'No description'}</div>
+                      <div className="playlist-tracks">{playlist.tracks?.total || 0} tracks</div>
+                    </div>
+                    <button 
+                      onClick={() => selectScheduledPlaylist(playlist)} 
+                      disabled={scheduledPlaylists.find(p => p.id === playlist.id)}
+                      className="select-btn"
+                    >
+                      {scheduledPlaylists.find(p => p.id === playlist.id) ? 'Added' : 'Add'}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {scheduledPlaylists.length === 0 && (
+              <div className="no-playlists-warning">
+                <p>⚠️ No playlists selected for scheduled playback. Add playlists above to enable automatic music at scheduled times.</p>
+              </div>
+            )}
+          </div>
+
           <div className="schedule-header">
-            <h3>Schedule Configuration</h3>
-            <p>Set when your timer should be active</p>
+            <h4>⏰ Time Schedule Configuration</h4>
+            <p>Choose when your selected playlists should play automatically. Calendar dates override weekly patterns.</p>
             
             <div className="schedule-type-toggle">
               <button
