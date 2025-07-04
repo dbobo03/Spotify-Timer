@@ -1035,7 +1035,7 @@ const SpotifyTimer = () => {
   }
 
   // Main logged-in interface
-            
+  return (
             {/* Timer Mode Toggle */}
             <div className="setting-group">
               <label>Timer Mode</label>
