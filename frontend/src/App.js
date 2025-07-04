@@ -1010,7 +1010,135 @@ const SpotifyTimer = () => {
       {/* Schedule Tab - Same as in logged-out state but with additional features */}
       {activeTab === 'schedule' && (
         <div className="schedule-section">
-          {/* Same schedule content as above */}
+          <div className="schedule-header">
+            <h3>Schedule Configuration</h3>
+            <p>Set when your timer should be active</p>
+            
+            <div className="schedule-type-toggle">
+              <button
+                onClick={() => setScheduleType('weekly')}
+                className={scheduleType === 'weekly' ? 'toggle-btn active' : 'toggle-btn'}
+              >
+                Weekly Pattern
+              </button>
+              <button
+                onClick={() => setScheduleType('calendar')}
+                className={scheduleType === 'calendar' ? 'toggle-btn active' : 'toggle-btn'}
+              >
+                Calendar View
+              </button>
+            </div>
+          </div>
+
+          {scheduleType === 'weekly' && (
+            <div className="weekly-schedule-section">
+              <h4>Weekly Recurring Schedule</h4>
+              <p>Select time slots for each day (7:00 AM - 5:00 PM)</p>
+              
+              <div className="weekly-schedule">
+                <div className="schedule-header-weekly">
+                  <div className="time-label">Time</div>
+                  {DAYS.map(day => (
+                    <div key={day} className="day-header">
+                      <div className="day-name">{day.substring(0, 3)}</div>
+                      <label className="whole-day-checkbox">
+                        <input
+                          type="checkbox"
+                          checked={weeklySchedule[day]?.wholeDay || false}
+                          onChange={() => {
+                            const allSelected = !weeklySchedule[day]?.wholeDay;
+                            setWeeklySchedule(prev => {
+                              const newTimeSlots = {};
+                              TIME_SLOTS.forEach(slot => {
+                                newTimeSlots[slot] = allSelected;
+                              });
+                              
+                              return {
+                                ...prev,
+                                [day]: {
+                                  wholeDay: allSelected,
+                                  timeSlots: newTimeSlots
+                                }
+                              };
+                            });
+                          }}
+                        />
+                        All Day
+                      </label>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="schedule-grid">
+                  {TIME_SLOTS.map(timeSlot => (
+                    <div key={timeSlot} className="schedule-row">
+                      <div className="time-slot-label">{timeSlot}</div>
+                      {DAYS.map(day => (
+                        <div key={`${day}-${timeSlot}`} className="schedule-cell">
+                          <input
+                            type="checkbox"
+                            checked={weeklySchedule[day]?.timeSlots?.[timeSlot] || false}
+                            onChange={() => {
+                              setWeeklySchedule(prev => ({
+                                ...prev,
+                                [day]: {
+                                  ...prev[day],
+                                  timeSlots: {
+                                    ...prev[day]?.timeSlots,
+                                    [timeSlot]: !prev[day]?.timeSlots?.[timeSlot]
+                                  }
+                                }
+                              }));
+                            }}
+                            className="schedule-checkbox"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {scheduleType === 'calendar' && (
+            <div className="calendar-schedule-section">
+              <h4>Calendar-Based Scheduling</h4>
+              <p>Set schedules for specific dates (months in advance)</p>
+              
+              <div className="calendar-container">
+                {renderCalendar()}
+                
+                {selectedDate && (
+                  <div className="date-schedule-config">
+                    <h4>Schedule for {selectedDate.toLocaleDateString()}</h4>
+                    
+                    <label className="whole-day-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={calendarSchedule[formatDateKey(selectedDate)]?.wholeDay || false}
+                        onChange={() => toggleCalendarWholeDay(selectedDate)}
+                      />
+                      Whole Day
+                    </label>
+                    
+                    <div className="time-slots-config">
+                      {TIME_SLOTS.map(timeSlot => (
+                        <label key={timeSlot} className="time-slot-checkbox">
+                          <input
+                            type="checkbox"
+                            checked={calendarSchedule[formatDateKey(selectedDate)]?.timeSlots?.[timeSlot] || false}
+                            onChange={() => toggleCalendarScheduleSlot(selectedDate, timeSlot)}
+                          />
+                          {timeSlot}
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       )}
 
