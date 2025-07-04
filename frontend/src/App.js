@@ -1019,6 +1019,136 @@ const SpotifyTimer = () => {
     };
   }, []);
 
+  // Timer logic
+  useEffect(() => {
+    if (isTimerRunning && timeRemaining > 0) {
+      timerIntervalRef.current = setInterval(() => {
+        setTimeRemaining(prev => {
+          if (prev <= 1) {
+            // Timer expired - trigger music playback
+            triggerMusicPlayback();
+            return timerDuration * 60; // Reset timer
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    } else {
+      clearInterval(timerIntervalRef.current);
+    }
+
+    return () => clearInterval(timerIntervalRef.current);
+  }, [isTimerRunning, timeRemaining, timerDuration]);
+
+  // Music playback logic
+  useEffect(() => {
+    if (isPlaying) {
+      playbackIntervalRef.current = setTimeout(() => {
+        setIsPlaying(false);
+        
+        // Handle different timing modes
+        if (playbackTimingMode === 'end') {
+          // Reset timer after music ends
+          setTimeRemaining(timerDuration * 60);
+        }
+        // For 'start' mode, timer already resets when music starts
+        
+        showNotification('Music segment finished', 'Ready for next timer cycle');
+      }, playDuration * 1000);
+    } else {
+      clearTimeout(playbackIntervalRef.current);
+    }
+
+    return () => clearTimeout(playbackIntervalRef.current);
+  }, [isPlaying, playDuration, playbackTimingMode, timerDuration]);
+
+  const triggerMusicPlayback = async () => {
+    if (selectedTracks.length === 0 && selectedPlaylists.length === 0) {
+      showNotification('No music selected', 'Please select tracks or playlists first');
+      setIsTimerRunning(false);
+      return;
+    }
+
+    setIsPlaying(true);
+    
+    // Show notification
+    showNotification('Timer expired!', 'Playing your selected music');
+    
+    // Play music via Spotify Web Playback SDK (if available)
+    try {
+      await playCurrentTrack();
+    } catch (error) {
+      console.error('Playback failed:', error);
+      showNotification('Playback failed', 'Please check your Spotify connection');
+    }
+  };
+
+  const playCurrentTrack = async () => {
+    if (!accessToken) return;
+
+    const allTracks = [...selectedTracks];
+    if (allTracks.length === 0) return;
+
+    const currentTrack = allTracks[currentTrackIndex % allTracks.length];
+    
+    try {
+      // Start playback
+      const response = await fetch('https://api.spotify.com/v1/me/player/play', {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          uris: [currentTrack.uri],
+          position_ms: trackPositions[currentTrack.uri] || 0
+        })
+      });
+
+      if (response.ok) {
+        // Move to next track for next cycle
+        setCurrentTrackIndex(prev => prev + 1);
+        
+        // Update track position for resume functionality
+        setTimeout(() => {
+          setTrackPositions(prev => ({
+            ...prev,
+            [currentTrack.uri]: (prev[currentTrack.uri] || 0) + (playDuration * 1000)
+          }));
+        }, playDuration * 1000);
+      } else {
+        throw new Error('Playback request failed');
+      }
+    } catch (error) {
+      console.error('Error playing track:', error);
+      throw error;
+    }
+  };
+
+  const showNotification = (title, body) => {
+    if (notificationsEnabled && 'Notification' in window && Notification.permission === 'granted') {
+      new Notification(title, {
+        body,
+        icon: '/favicon.ico',
+        badge: '/favicon.ico'
+      });
+    }
+  };
+
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  // Clean up intervals on unmount
+  useEffect(() => {
+    return () => {
+      clearInterval(timerIntervalRef.current);
+      clearTimeout(playbackIntervalRef.current);
+      clearInterval(absoluteTimerRef.current);
+    };
+  }, []);
+
   // If user doesn't have premium, show upgrade message
   if (user && user.product !== 'premium') {
     return (
