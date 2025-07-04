@@ -437,7 +437,7 @@ const SpotifyTimer = () => {
     }
   };
 
-  const removeTrack = (selectionId) => {
+  const selectPlaylist = (playlist) => {
     const newTracks = selectedTracks.filter(track => track.selectionId !== selectionId);
     setSelectedTracks(newTracks);
     if (accessToken) saveTimerSettings();
