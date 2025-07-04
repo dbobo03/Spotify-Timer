@@ -435,6 +435,12 @@ const SpotifyTimer = () => {
     if (accessToken) saveLocalSettings();
   };
 
+  const removeTrack = (selectionId) => {
+    const newTracks = selectedTracks.filter(track => track.selectionId !== selectionId);
+    setSelectedTracks(newTracks);
+    if (accessToken) saveTimerSettings();
+  };
+
   const searchPlaylists = async () => {
     if (!searchQuery.trim() || !accessToken) return;
     
