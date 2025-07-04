@@ -195,8 +195,112 @@
   margin-bottom: 15px;
 }
 
-/* Enhanced mobile responsiveness */
+/* Section descriptions */
+.section-description {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  border-left: 4px solid #1DB954;
+}
+
+.section-description h3 {
+  color: #1DB954;
+  margin: 0 0 10px 0;
+  font-size: 1.3em;
+}
+
+.section-description p {
+  color: #B3B3B3;
+  margin: 0;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+.feature-description {
+  background: rgba(29, 185, 84, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(29, 185, 84, 0.3);
+  color: #B3B3B3;
+  font-size: 0.85em;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+/* Manual track selection */
+.manual-track-selection {
+  margin-top: 30px;
+  padding: 25px;
+  background: #1a1a1a;
+  border-radius: 10px;
+  border: 1px solid #333;
+}
+
+.manual-track-selection h4 {
+  color: #1DB954;
+  margin-bottom: 15px;
+}
+
+.manual-track-selection h5 {
+  color: #1DB954;
+  margin-bottom: 12px;
+  font-size: 1em;
+}
+
+/* Scheduled playlists section */
+.scheduled-playlists-section {
+  margin-bottom: 30px;
+  padding: 25px;
+  background: #1a1a1a;
+  border-radius: 10px;
+  border: 1px solid #333;
+}
+
+.scheduled-playlists-section h4 {
+  color: #1DB954;
+  margin-bottom: 15px;
+}
+
+.scheduled-playlists-section h5 {
+  color: #1DB954;
+  margin-bottom: 12px;
+  font-size: 1em;
+}
+
+.no-playlists-warning {
+  background: rgba(255, 165, 0, 0.1);
+  border: 1px solid rgba(255, 165, 0, 0.3);
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.no-playlists-warning p {
+  color: #ffa500;
+  margin: 0;
+  font-size: 0.9em;
+}
+
+/* Enhanced mobile responsiveness for new sections */
 @media (max-width: 768px) {
+  .section-description,
+  .manual-track-selection,
+  .scheduled-playlists-section {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .section-description h3 {
+    font-size: 1.1em;
+  }
+  
+  .feature-description {
+    padding: 10px;
+    font-size: 0.8em;
+  }
+}
   .track-selection,
   .playlist-selection,
   .schedule-section {
