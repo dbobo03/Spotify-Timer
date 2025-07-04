@@ -58,22 +58,25 @@ const SpotifyTimer = () => {
   const [refreshToken, setRefreshToken] = useState(null);
   const [user, setUser] = useState(null);
 
-  // Track selection state
+  // Track selection state - separate for scheduled and manual
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [selectedTracks, setSelectedTracks] = useState([]);
-  const [selectedPlaylists, setSelectedPlaylists] = useState([]);
+  const [selectedTracks, setSelectedTracks] = useState([]); // For manual timer (20 slots)
+  const [selectedPlaylists, setSelectedPlaylists] = useState([]); // For scheduled playback
+  const [scheduledPlaylists, setScheduledPlaylists] = useState([]); // Dedicated for scheduled system
   const [isSearching, setIsSearching] = useState(false);
   const [searchType, setSearchType] = useState('tracks'); // 'tracks' or 'playlists'
 
-  // Timer state
-  const [timerDuration, setTimerDuration] = useState(30); // minutes
-  const [playDuration, setPlayDuration] = useState(30); // seconds
-  const [timeRemaining, setTimeRemaining] = useState(30 * 60); // seconds
-  const [isTimerRunning, setIsTimerRunning] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const [trackPositions, setTrackPositions] = useState({});
+  // Timer state - separate systems
+  const [timerDuration, setTimerDuration] = useState(30); // minutes - manual timer
+  const [playDuration, setPlayDuration] = useState(30); // seconds - both systems
+  const [timeRemaining, setTimeRemaining] = useState(30 * 60); // seconds - manual timer
+  const [isTimerRunning, setIsTimerRunning] = useState(false); // manual timer
+  const [isPlaying, setIsPlaying] = useState(false); // both systems
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0); // manual timer tracks
+  const [currentPlaylistIndex, setCurrentPlaylistIndex] = useState(0); // scheduled playlists
+  const [trackPositions, setTrackPositions] = useState({}); // remember positions for scheduled
+  const [playlistPositions, setPlaylistPositions] = useState({}); // remember playlist positions
 
   // Enhanced features
   const [activeTab, setActiveTab] = useState('welcome'); // welcome, timer, schedule, tracks, playlists
