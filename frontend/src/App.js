@@ -1289,6 +1289,121 @@ const SpotifyTimer = () => {
           )}
         </div>
       )}
+      
+      {/* Settings Modal */}
+      {showSettings && (
+        <div className="settings-overlay">
+          <div className="settings-modal">
+            <div className="settings-header">
+              <h3>Settings</h3>
+              <button 
+                className="close-btn"
+                onClick={() => setShowSettings(false)}
+              >
+                ×
+              </button>
+            </div>
+            
+            <div className="settings-content">
+              <div className="setting-group">
+                <h4>Timer Settings</h4>
+                <div className="timer-presets">
+                  <label>Quick Timer Presets:</label>
+                  <div className="preset-buttons">
+                    {TIMER_PRESETS.map(preset => (
+                      <button
+                        key={preset.label}
+                        onClick={() => setTimerDuration(preset.value)}
+                        className={timerDuration === preset.value ? 'preset-btn active' : 'preset-btn'}
+                      >
+                        {preset.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="custom-timer">
+                  <label>Custom Timer (minutes):</label>
+                  <input
+                    type="number"
+                    value={customTimerInput}
+                    onChange={(e) => setCustomTimerInput(e.target.value)}
+                    placeholder="Enter minutes"
+                    min="0.1"
+                    max="120"
+                    step="0.1"
+                  />
+                  <button 
+                    onClick={() => {
+                      const minutes = parseFloat(customTimerInput);
+                      if (minutes && minutes > 0 && minutes <= 120) {
+                        setTimerDuration(minutes);
+                        setTimeRemaining(minutes * 60);
+                        setCustomTimerInput('');
+                      }
+                    }}
+                    className="set-timer-btn"
+                  >
+                    Set Timer
+                  </button>
+                </div>
+              </div>
+
+              <div className="setting-group">
+                <h4>Playback Settings</h4>
+                <div className="play-duration-setting">
+                  <label>Play Duration: {playDuration} seconds</label>
+                  <input
+                    type="range"
+                    min="10"
+                    max="60"
+                    value={playDuration}
+                    onChange={(e) => setPlayDuration(parseInt(e.target.value))}
+                    className="duration-slider"
+                  />
+                  <div className="slider-labels">
+                    <span>10s</span>
+                    <span>30s</span>
+                    <span>60s</span>
+                  </div>
+                </div>
+                
+                <div className="playback-timing">
+                  <label>Playback Timing:</label>
+                  <div className="timing-buttons">
+                    <button
+                      onClick={() => setPlaybackTimingMode('start')}
+                      className={playbackTimingMode === 'start' ? 'timing-btn active' : 'timing-btn'}
+                    >
+                      From Start
+                    </button>
+                    <button
+                      onClick={() => setPlaybackTimingMode('random')}
+                      className={playbackTimingMode === 'random' ? 'timing-btn active' : 'timing-btn'}
+                    >
+                      Random Position
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="setting-group">
+                <h4>Notifications</h4>
+                <div className="notification-setting">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={notificationsEnabled}
+                      onChange={(e) => setNotificationsEnabled(e.target.checked)}
+                    />
+                    Enable browser notifications
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
