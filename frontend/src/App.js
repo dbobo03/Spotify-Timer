@@ -890,7 +890,7 @@ const SpotifyTimer = () => {
   }
 
   // If user doesn't have premium, show upgrade message
-  if (user && !user.is_premium) {
+  if (user && user.product !== 'premium') {
     return (
       <div className="spotify-timer">
         <div className="premium-required">
