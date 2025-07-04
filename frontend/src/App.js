@@ -1418,6 +1418,12 @@ const SpotifyTimer = () => {
             <div className="timer-info">
               Timer: {timerDuration >= 1 ? `${timerDuration} min` : `${Math.round(timerDuration * 60)}s`} | Play: {playDuration}s | Items: {selectedTracks.length + selectedPlaylists.length}
             </div>
+            {(Object.keys(weeklySchedule).some(day => weeklySchedule[day]?.wholeDay || Object.keys(weeklySchedule[day]?.timeSlots || {}).length > 0) ||
+              Object.keys(calendarSchedule).length > 0) && (
+              <div className="schedule-status">
+                🕐 Automatic scheduling active - monitoring for scheduled times
+              </div>
+            )}
           </div>
 
           {/* Controls */}
