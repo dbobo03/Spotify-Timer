@@ -1369,21 +1369,26 @@ const SpotifyTimer = () => {
                 </div>
                 
                 <div className="playback-timing">
-                  <label>Playback Timing:</label>
+                  <label>Timer Restart Mode:</label>
                   <div className="timing-buttons">
                     <button
                       onClick={() => setPlaybackTimingMode('start')}
                       className={playbackTimingMode === 'start' ? 'timing-btn active' : 'timing-btn'}
                     >
-                      From Start
+                      When Music Starts
                     </button>
                     <button
-                      onClick={() => setPlaybackTimingMode('random')}
-                      className={playbackTimingMode === 'random' ? 'timing-btn active' : 'timing-btn'}
+                      onClick={() => setPlaybackTimingMode('end')}
+                      className={playbackTimingMode === 'end' ? 'timing-btn active' : 'timing-btn'}
                     >
-                      Random Position
+                      When Music Ends
                     </button>
                   </div>
+                  <p className="timing-description">
+                    {playbackTimingMode === 'start' 
+                      ? 'Timer restarts immediately when music begins playing (30s intervals)'
+                      : 'Timer restarts after the music interval finishes playing (30s + timer duration)'}
+                  </p>
                 </div>
               </div>
 
