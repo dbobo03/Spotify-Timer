@@ -203,6 +203,9 @@ const SpotifyTimer = () => {
         setScheduledPlaylists(settings.scheduledPlaylists || []);
         setPlaylistPositions(settings.playlistPositions || {});
         setTrackPositions(settings.trackPositions || {});
+        setScheduledPlaylists(settings.scheduledPlaylists || []);
+        setPlaylistPositions(settings.playlistPositions || {});
+        setTrackPositions(settings.trackPositions || {});
       }
     } catch (error) {
       console.error('Error loading local settings:', error);
