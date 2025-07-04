@@ -438,10 +438,6 @@ const SpotifyTimer = () => {
   };
 
   const selectPlaylist = (playlist) => {
-    const newTracks = selectedTracks.filter(track => track.selectionId !== selectionId);
-    setSelectedTracks(newTracks);
-    if (accessToken) saveTimerSettings();
-  };
 
   const selectScheduledPlaylist = (playlist) => {
     if (scheduledPlaylists.find(p => p.id === playlist.id)) {
