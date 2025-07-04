@@ -122,6 +122,9 @@ frontend:
       - working: false
         agent: "testing"
         comment: "After testing the latest fixes, the app still shows a white page after Spotify login. The previous axios issue appears to be fixed (axios is no longer undefined in the global scope), but now there's a new error: 'setupAbsoluteTimeMonitoring is not defined'. This function is called in the useEffect hook after the access token is set, but it's not defined in the code. The React root element is empty, indicating the app crashes during initialization."
+      - working: false
+        agent: "testing"
+        comment: "Tested the app again after the reported fixes. The initial app loads correctly without a white page, and the Spotify login button redirects properly to the Spotify OAuth page. However, after simulating a successful token callback, the app still crashes with the same error: 'setupAbsoluteTimeMonitoring is not defined'. The token is successfully stored in localStorage, but the app fails to render the logged-in interface. The root element remains empty after the token callback, resulting in a white page. The issue is that the function 'setupAbsoluteTimeMonitoring' is referenced in the useEffect hook that runs after setting the access token, but this function is not defined anywhere in the code."
 
   - task: "Calendar and Schedule Features with Storage"
     implemented: true
