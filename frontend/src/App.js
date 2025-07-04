@@ -1216,8 +1216,14 @@ const SpotifyTimer = () => {
   };
 
   const triggerScheduledPlayback = async () => {
-    if (selectedTracks.length === 0 && selectedPlaylists.length === 0) {
-      showNotification('Scheduled time reached!', 'No music selected - please add tracks or playlists');
+    if (scheduledPlaylists.length === 0) {
+      // Ask user to set up playlists for scheduled playback
+      showNotification('Scheduled time reached!', 'Please add playlists in the Schedule tab for automatic playback');
+      
+      // Prompt user to set up playlists
+      if (confirm('No playlists set for scheduled playback. Would you like to set up playlists now?')) {
+        setActiveTab('schedule');
+      }
       return;
     }
 
@@ -1228,20 +1234,106 @@ const SpotifyTimer = () => {
       hour12: true 
     });
 
+    // Get current playlist (cycle through them)
+    const currentPlaylist = scheduledPlaylists[currentPlaylistIndex % scheduledPlaylists.length];
+    const playlistKey = `playlist_${currentPlaylist.id}`;
+
     showNotification(
       `🎵 Scheduled Music Time! ${timeString}`, 
-      `Playing your music for ${playDuration} seconds`
+      `Playing ${currentPlaylist.name} for ${playDuration} seconds`
     );
 
     // Set playing state and trigger music
     setIsPlaying(true);
     
     try {
-      await playCurrentTrack();
+      await playScheduledPlaylist(currentPlaylist, playlistKey);
     } catch (error) {
       console.error('Scheduled playback failed:', error);
       showNotification('Playback failed', 'Please check your Spotify connection and premium status');
       setIsPlaying(false);
+    }
+  };
+
+  const playScheduledPlaylist = async (playlist, playlistKey) => {
+    if (!accessToken) return;
+
+    try {
+      // Get playlist tracks first
+      const tracksResponse = await fetch(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+
+      if (!tracksResponse.ok) {
+        throw new Error('Failed to get playlist tracks');
+      }
+
+      const tracksData = await tracksResponse.json();
+      const tracks = tracksData.items.filter(item => item.track && item.track.uri);
+
+      if (tracks.length === 0) {
+        throw new Error('No playable tracks in playlist');
+      }
+
+      // Get current position in playlist (where we left off)
+      const savedPosition = playlistPositions[playlistKey] || 0;
+      const currentTrackInPlaylist = tracks[savedPosition % tracks.length];
+      const trackUri = currentTrackInPlaylist.track.uri;
+
+      // Get position within the track (where we left off in this specific track)
+      const trackPosition = trackPositions[trackUri] || 0;
+
+      // Start playback from where we left off
+      const response = await fetch('https://api.spotify.com/v1/me/player/play', {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          context_uri: playlist.uri,
+          offset: { position: savedPosition % tracks.length },
+          position_ms: trackPosition
+        })
+      });
+
+      if (response.ok) {
+        // After playback, update positions for next time
+        setTimeout(() => {
+          const newTrackPosition = trackPosition + (playDuration * 1000);
+          const trackDuration = currentTrackInPlaylist.track.duration_ms || 210000; // Default 3.5 mins
+
+          // If we've played past the end of the track, move to next track
+          if (newTrackPosition >= trackDuration) {
+            // Move to next track in playlist
+            setPlaylistPositions(prev => ({
+              ...prev,
+              [playlistKey]: savedPosition + 1
+            }));
+            // Reset track position for new track
+            setTrackPositions(prev => ({
+              ...prev,
+              [trackUri]: 0
+            }));
+          } else {
+            // Update position within current track
+            setTrackPositions(prev => ({
+              ...prev,
+              [trackUri]: newTrackPosition
+            }));
+          }
+
+          // Move to next playlist for next scheduled time
+          setCurrentPlaylistIndex(prev => prev + 1);
+        }, playDuration * 1000);
+      } else {
+        throw new Error('Playback request failed');
+      }
+    } catch (error) {
+      console.error('Error playing scheduled playlist:', error);
+      throw error;
     }
   };
 
